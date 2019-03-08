@@ -1,5 +1,5 @@
 **First things first**  
-This repo is a clone of AttnGAN by MSFT Research. You can find the original repo at [here](https://github.com/taoxugit/AttnGAN.git).
+This repo is a convenient clone of AttnGAN by MSFT Research. You can find the original repo at [here](https://github.com/taoxugit/AttnGAN.git).
 
 # AttnGAN
 
@@ -29,7 +29,6 @@ with Attentional Generative Adversarial Networks](http://openaccess.thecvf.com/c
 1. Download our preprocessed metadata for [birds](https://drive.google.com/open?id=1O_LtUP9sch09QH3s_EBAgLEctBQ5JBSJ) or [coco](https://drive.google.com/open?id=1rSnbIGNDGZeHlsUlLdahj0RJ9oo6lgH9) and save them to `data/`
 2. Download the [birds](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) image data. Extract them to `data/birds/`
 3. Download [coco](http://cocodataset.org/#download) dataset and extract the images to `data/coco/`
-
 
 
 **Training**
