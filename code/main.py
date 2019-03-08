@@ -1,21 +1,21 @@
 from __future__ import print_function
 
-from miscc.config import cfg, cfg_from_file
-from datasets import TextDataset
-from trainer import condGANTrainer as trainer
-
+import argparse
+import datetime
 import os
+import pprint
+import random
 import sys
 import time
-import random
-import pprint
-import datetime
+
 import dateutil.tz
-import argparse
 import numpy as np
 
 import torch
 import torchvision.transforms as transforms
+from datasets import TextDataset
+from miscc.config import cfg, cfg_from_file
+from trainer import condGANTrainer as trainer
 
 dir_path = (os.path.abspath(os.path.join(os.path.realpath(__file__), './.')))
 sys.path.append(dir_path)
@@ -141,8 +141,10 @@ if __name__ == "__main__":
     else:
         '''generate images from pre-extracted embeddings'''
         if cfg.B_VALIDATION:
-            algo.sampling(split_dir)  # generate images for the whole valid dataset
+            # generate images for the whole valid dataset
+            algo.sampling(split_dir)
         else:
-            gen_example(dataset.wordtoix, algo)  # generate images for customized captions
+            # generate images for customized captions
+            gen_example(dataset.wordtoix, algo)
     end_t = time.time()
     print('Total time for training:', end_t - start_t)
