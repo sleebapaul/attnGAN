@@ -90,8 +90,6 @@ if __name__ == "__main__":
     else:
         cfg.CUDA = False
 
-    if args.data_dir != '':
-        cfg.DATA_DIR = args.data_dir
     print('Using config:')
     pprint.pprint(cfg)
 
@@ -144,6 +142,6 @@ if __name__ == "__main__":
             algo.sampling(split_dir)
         else:
             # generate images for customized captions
-            gen_example_from_text(args.input_data, dataset.wordtoix, algo)
+            gen_example_from_text(args.input_text, dataset.wordtoix, algo)
     end_t = time.time()
     print('Total time for training:', end_t - start_t)

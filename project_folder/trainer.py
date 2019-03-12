@@ -382,7 +382,7 @@ class condGANTrainer(object):
 
             # the path to save generated images
             s_tmp = model_dir[:model_dir.rfind('.pth')]
-            save_dir = '%s/%s' % (s_tmp, split_dir)
+            save_dir = '%s' % ("output", split_dir)
             mkdir_p(save_dir)
 
             cnt = 0
@@ -457,7 +457,7 @@ class condGANTrainer(object):
             netG.cuda()
             netG.eval()
             for key in data_dic:
-                save_dir = '%s/%s' % (s_tmp, key)
+                save_dir = '%s' % ("output")
                 mkdir_p(save_dir)
                 captions, cap_lens, sorted_indices = data_dic[key]
 
