@@ -382,7 +382,7 @@ class condGANTrainer(object):
 
             # the path to save generated images
             s_tmp = model_dir[:model_dir.rfind('.pth')]
-            save_dir = '%s' % ("output", split_dir)
+            save_dir = '%s' % (split_dir)
             mkdir_p(save_dir)
 
             cnt = 0
@@ -429,7 +429,7 @@ class condGANTrainer(object):
                         fullpath = '%s_s%d.png' % (s_tmp, k)
                         im.save(fullpath)
 
-    def gen_example(self, data_dic):
+    def gen_example(self, output_dir, data_dic):
         if cfg.TRAIN.NET_G == '':
             print('Error: the path for models is not found!')
         else:
@@ -443,7 +443,6 @@ class condGANTrainer(object):
             text_encoder = text_encoder.cuda()
             text_encoder.eval()
 
-            # the path to save generated images
             if cfg.GAN.B_DCGAN:
                 netG = G_DCGAN()
             else:
@@ -457,7 +456,7 @@ class condGANTrainer(object):
             netG.cuda()
             netG.eval()
             for key in data_dic:
-                save_dir = '%s' % ("output")
+                save_dir = '%s' % (output_dir)
                 mkdir_p(save_dir)
                 captions, cap_lens, sorted_indices = data_dic[key]
 

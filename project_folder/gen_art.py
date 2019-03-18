@@ -34,12 +34,16 @@ def parse_args():
                         help='optional config file',
                         default='./cfg/eval_coco.yml', type=str)
     parser.add_argument('--gpu', dest='gpu_id', type=int, default=-1)
+    parser.add_argument('--data_dir', dest='data_dir', type=str, default='')
+    parser.add_argument('--model_path', dest='model_path', type=str, default='')
+    parser.add_argument('--textencoder_path', dest='textencoder_path', type=str, default='')
+    parser.add_argument('--output_dir', dest='output_dir', type=str, default='output')
     parser.add_argument('--manualSeed', type=int, help='manual seed')
     args = parser.parse_args()
     return args
 
 
-def gen_example_from_text(input_text, wordtoix, algo):
+def gen_example_from_text(input_text, output_dir, wordtoix, algo):
     '''
     Generate image from example sentence
     '''
@@ -76,10 +80,14 @@ def gen_example_from_text(input_text, wordtoix, algo):
         c_len = len(cap)
         cap_array[i, :c_len] = cap
     data_dic["data"] = [cap_array, cap_lens, sorted_indices]
-    algo.gen_example(data_dic)
+    algo.gen_example(output_dir, data_dic)
 
 
 if __name__ == "__main__":
+    import sys
+    print(sys.version)
+    print(torch.__version__)
+    
     args = parse_args()
 
     if args.cfg_file is not None:
@@ -90,8 +98,14 @@ if __name__ == "__main__":
     else:
         cfg.CUDA = False
 
-    print('Using config:')
-    pprint.pprint(cfg)
+    if args.data_dir != '':
+        cfg.DATA_DIR = args.data_dir
+
+    if args.model_path != '':
+        cfg.TRAIN.NET_G = args.model_path
+
+    if args.textencoder_path != '':
+        cfg.TRAIN.NET_E = args.textencoder_path
 
     if not cfg.TRAIN.FLAG:
         args.manualSeed = 100
@@ -142,6 +156,6 @@ if __name__ == "__main__":
             algo.sampling(split_dir)
         else:
             # generate images for customized captions
-            gen_example_from_text(args.input_text, dataset.wordtoix, algo)
+            gen_example_from_text(args.input_text, args.output_dir, dataset.wordtoix, algo)
     end_t = time.time()
     print('Total time for training:', end_t - start_t)
