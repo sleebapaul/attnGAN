@@ -1,7 +1,0 @@
-Flask
-python-dateutil
-easydict
-scikit-image
-azure-storage-blob
-applicationinsights
-libmc

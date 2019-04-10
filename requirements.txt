@@ -1,0 +1,4 @@
+torch torchvision
+easydict
+numpy --upgrade
+--upgrade scikit-image
